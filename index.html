@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>מסע ההכשרה של עידן גבאי - Voxela API</title>
+    <title>מסע הלמידה של עידן גבאי - Voxela</title>
     <style>
         * {
             margin: 0;
@@ -152,6 +152,8 @@
         .slide:nth-child(6) { animation-delay: 0.6s; }
         .slide:nth-child(7) { animation-delay: 0.7s; }
         .slide:nth-child(8) { animation-delay: 0.8s; }
+        .slide:nth-child(9) { animation-delay: 0.9s; }
+        .slide:nth-child(10) { animation-delay: 1s; }
 
         h1 {
             color: #667eea;
@@ -202,7 +204,7 @@
             50% { transform: translateY(-10px); }
         }
 
-        .week-card {
+        .concept-card {
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             border-radius: 15px;
             padding: 25px;
@@ -211,26 +213,33 @@
             transition: transform 0.3s;
         }
 
-        .week-card:hover {
+        .concept-card:hover {
             transform: translateX(-10px);
             box-shadow: 5px 5px 20px rgba(0,0,0,0.1);
         }
 
-        .week-number {
+        .motivation-box {
+            background: #fffacd;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+            border-right: 5px solid #ffd700;
+            position: relative;
+        }
+
+        .motivation-box::before {
+            content: '💡';
             position: absolute;
-            top: -15px;
+            top: -10px;
             right: 20px;
-            background: #667eea;
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5em;
-            font-weight: bold;
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            font-size: 2em;
+            animation: swing 2s infinite;
+        }
+
+        @keyframes swing {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(10deg); }
+            75% { transform: rotate(-10deg); }
         }
 
         .tech-stack {
@@ -256,30 +265,15 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
-        .code-example {
-            background: #2d2d2d;
-            color: #f8f8f2;
-            padding: 20px;
+        .example-box {
+            background: #e8f5e9;
             border-radius: 10px;
+            padding: 20px;
             margin: 20px 0;
-            font-family: 'Consolas', 'Monaco', monospace;
-            position: relative;
-            overflow: auto;
+            border-right: 5px solid #4caf50;
         }
 
-        .code-example::before {
-            content: 'Python';
-            position: absolute;
-            top: 5px;
-            right: 10px;
-            background: #667eea;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 0.8em;
-        }
-
-        .course-links {
+        .course-box {
             background: #f8f9fa;
             border-right: 5px solid #667eea;
             padding: 20px;
@@ -287,37 +281,98 @@
             border-radius: 10px;
         }
 
-        .course-links h4 {
+        .course-box h4 {
             color: #667eea;
             margin-bottom: 15px;
         }
 
-        .course-links ul {
+        .course-box ul {
             list-style: none;
             padding-right: 0;
         }
 
-        .course-links li {
+        .course-box li {
             margin: 10px 0;
             padding-right: 20px;
             position: relative;
         }
 
-        .course-links li::before {
+        .course-box li::before {
             content: '🎯';
             position: absolute;
             right: 0;
         }
 
-        .course-links a {
+        .course-box a {
             color: #764ba2;
             text-decoration: none;
             transition: color 0.3s;
         }
 
-        .course-links a:hover {
+        .course-box a:hover {
             color: #667eea;
             text-decoration: underline;
+        }
+
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .icon-item {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            transition: all 0.3s;
+        }
+
+        .icon-item:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        .icon-item .icon {
+            font-size: 3em;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            right: 50px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: #667eea;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-right: 70px;
+            margin-bottom: 30px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            right: 43px;
+            top: 5px;
+            width: 17px;
+            height: 17px;
+            background: #667eea;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #667eea;
         }
 
         .progress-bar {
@@ -363,39 +418,6 @@
             animation: swing 2s infinite;
         }
 
-        @keyframes swing {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(10deg); }
-            75% { transform: rotate(-10deg); }
-        }
-
-        .checkpoint {
-            background: #e8f5e9;
-            border-radius: 10px;
-            padding: 15px;
-            margin: 10px 0;
-            border-right: 3px solid #4caf50;
-            transition: transform 0.3s;
-        }
-
-        .checkpoint:hover {
-            transform: translateX(-5px);
-            box-shadow: 3px 3px 10px rgba(0,0,0,0.1);
-        }
-
-        .motivation-quote {
-            text-align: center;
-            font-style: italic;
-            font-size: 1.2em;
-            color: #666;
-            margin: 30px 0;
-            padding: 20px;
-            border-right: 3px solid #667eea;
-            border-left: 3px solid #764ba2;
-            background: #f8f9fa;
-            border-radius: 10px;
-        }
-
         .final-cta {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -429,33 +451,6 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
-        .icon-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
-            margin: 20px 0;
-        }
-
-        .icon-item {
-            text-align: center;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 15px;
-            transition: all 0.3s;
-        }
-
-        .icon-item:hover {
-            background: #667eea;
-            color: white;
-            transform: translateY(-5px);
-        }
-
-        .icon-item .icon {
-            font-size: 3em;
-            margin-bottom: 10px;
-            display: block;
-        }
-
         @media (max-width: 768px) {
             .slide {
                 padding: 20px;
@@ -477,7 +472,7 @@
 </head>
 <body>
     <div class="presentation-container">
-        <!-- Slide 1: כותרת ופתיחה -->
+        <!-- Slide 1: פתיחה ומוטיבציה -->
         <div class="slide">
             <div class="voxela-logo">
                 <span class="logo-bars">
@@ -487,19 +482,171 @@
                 </span>
                 <span style="margin-right: 15px;">VOXELA</span>
             </div>
-            <h1>🚀 מסע ההכשרה של עידן גבאי</h1>
-            <h2>מ-C++ ל-Python: הדרך להיות מפתח Voxela API</h2>
+            <h1>🚀 מסע הלמידה של עידן גבאי</h1>
+            
+            <div style="text-align: center; margin: 20px 0;">
+                <img src="idan.jpg" alt="עידן גבאי" style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,0.3); border: 5px solid #667eea;">
+            </div>
+            
             <div class="welcome-message">
                 <p>היי עידן! <span class="emoji">👋</span></p>
-                <p>מוכן להפוך את הידע שלך ב-C++ לסופר-כוחות של פיתוח ווב מודרני?</p>
-                <p>בואו נתחיל במסע של 4 שבועות שישנה את הקריירה שלך!</p>
+                <p>הפסנתרן והזמר שחולם להיות כמו חנן בן ארי... 🎹🎤</p>
+                <p><strong>אבל רגע! יש לנו חדשות טובות יותר!</strong></p>
             </div>
+            
             <div class="fun-fact">
-                <strong>עובדה משעשעת:</strong> מעבר מ-C++ ל-Python זה כמו לעבור מלנהוג במכונית פורמולה 1 לטוס במטוס - פחות שליטה ישירה, אבל מגיעים הרבה יותר רחוק! ✈️
+                <strong>במקום לשיר "אמא אם הייתי"...</strong>
+                <p>תשיר "Backend אם הייתי" - ותהיה מהנדס תוכנה מהשורה הראשונה! 🎵</p>
+                <p>כי בואו נודה באמת - משכורת של מפתח Senior עדיפה על הופעות בחתונות... 💰</p>
+            </div>
+            
+            <div class="motivation-box">
+                <h3>למה Voxela?</h3>
+                <p>Voxela היא פלטפורמה מתקדמת לניהול לידים עם יכולות AI לשיחות קוליות אוטומטיות.</p>
+                <p>המערכת בנויה על הטכנולוגיות המתקדמות ביותר בתעשייה ומשלבת:</p>
+                <ul>
+                    <li>🔧 <strong>Backend API</strong> - שרת חכם ומהיר בPython/FastAPI</li>
+                    <li>🎨 <strong>Frontend UI</strong> - ממשק משתמש מודרני בReact</li>
+                    <li>☁️ <strong>Cloud Infrastructure</strong> - תשתית ענן מלאה בGoogle Cloud</li>
+                </ul>
             </div>
         </div>
 
-        <!-- Slide 2: סקירה כללית -->
+        <!-- Slide 1.25: אזהרת ארי -->
+        <div class="slide">
+            <h2>⚠️ אזהרה: מה קורה למי שנשאר עם טכנולוגיות ישנות</h2>
+            
+            <div style="text-align: center; margin: 20px 0;">
+                <img src="ari.jpg" alt="ארי - אזהרה חיה" style="width: 300px; height: 400px; object-fit: cover; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); filter: grayscale(50%);">
+                <p style="font-size: 1.5em; margin-top: 15px; color: #d32f2f;">👆 ארי - החבר שלנו שנשאר עם Firmware</p>
+            </div>
+            
+            <div class="motivation-box" style="background: #ffebee; border-color: #d32f2f;">
+                <strong>🚨 הסיפור המזעזע של ארי:</strong>
+                <ul>
+                    <li>👨‍🦲 התחיל עם שיער מלא, הFirmware גזל את השיער שלו byte אחרי byte</li>
+                    <li>😔 מחייך בתמונה אבל בפנים בוכה על pointer arithmetic</li>
+                    <li>🐕 הכלב היחיד שמבין אותו כי גם הוא לא יודע מה זה Git</li>
+                    <li>🏠 הצמחים בבית יותר מעניינים מהקוד שהוא כותב</li>
+                    <li>💔 עדיין מחכה שMicrochip יוציאו compiler שעובד</li>
+                </ul>
+            </div>
+            
+            <div class="example-box" style="background: #fff3e0; border-color: #ff9800;">
+                <h4>😱 יום טיפוסי בחייו של ארי:</h4>
+                <ol>
+                    <li><strong>06:00</strong> - קם, בודק אם ה-JTAG עדיין מחובר</li>
+                    <li><strong>09:00</strong> - מתחיל לדבג interrupt handler</li>
+                    <li><strong>18:00</strong> - עדיין מדבג את אותו interrupt handler</li>
+                    <li><strong>22:00</strong> - מגלה שהבעיה הייתה חוסר ב-volatile</li>
+                    <li><strong>23:00</strong> - בוכה לתוך הכרית שעליה רקום "I ❤️ Assembly"</li>
+                </ol>
+            </div>
+            
+            <div class="fun-fact" style="background: #e8f5e9; border-color: #4caf50;">
+                <strong>החדשות הטובות עידן:</strong>
+                <p>אנחנו כאן כדי למנוע ממך להפוך לארי השני! 🦸‍♂️</p>
+                <p>עם Python, Cloud ו-AI - תישאר עם שיער על הראש ושמחה בלב!</p>
+            </div>
+            
+            <div style="text-align: center; padding: 20px; background: linear-gradient(135deg, #d32f2f 0%, #f44336 100%); color: white; border-radius: 15px; margin-top: 20px;">
+                <h3 style="color: white; border: none;">⏰ הזמן קצר!</h3>
+                <p style="font-size: 1.2em;">כל יום שאתה נשאר עם C++ = יום קרוב יותר לגורלו של ארי</p>
+                <p style="font-size: 1.1em;"><strong>הצל את עצמך עכשיו! 🚁</strong></p>
+            </div>
+        </div>
+
+        <!-- Slide 1.5: Biosense Webster Connection -->
+        <div class="slide">
+            <h2>💙 מ-Biosense Webster ל-Voxela - הגיע הזמן לשדרוג!</h2>
+            
+            <div style="text-align: center; margin: 20px 0;">
+                <div style="display: inline-block; padding: 20px; background: #f8f9fa; border-radius: 15px;">
+                    <h3 style="color: #003087; margin-bottom: 10px;">Biosense Webster</h3>
+                    <p style="color: #666;">Part of Johnson & Johnson MedTech</p>
+                    <p style="font-size: 0.9em;">Global Leader in Cardiac Electrophysiology</p>
+                </div>
+            </div>
+
+            <div class="motivation-box">
+                <strong>עידן, בוא נדבר רגע ברצינות... 😏</strong>
+                <p>אתה עובד בחברה שעדיין משתמשת ב-C++? בשנת 2025? Really?</p>
+                <p>בזמן שכל העולם עבר ל-Python, JavaScript וGo, אתם עדיין מנהלים זיכרון ידנית? 🦖</p>
+            </div>
+
+            <div class="concept-card">
+                <h3>🎭 הגיע הזמן לצאת מהמוזיאון הטכנולוגי!</h3>
+                
+                <div class="icon-grid">
+                    <div class="icon-item">
+                        <span class="icon">🐌</span>
+                        <h4>מהירות פיתוח</h4>
+                        <p><strong>Biosense:</strong> 6 חודשים לפיצ'ר חדש</p>
+                        <p><strong>Voxela:</strong> 2 ימים ויש deployment!</p>
+                    </div>
+                    <div class="icon-item">
+                        <span class="icon">📚</span>
+                        <h4>סטאק טכנולוגי</h4>
+                        <p><strong>Biosense:</strong> C++ מ-1998</p>
+                        <p><strong>Voxela:</strong> Python 3.12 + AI + Cloud</p>
+                    </div>
+                    <div class="icon-item">
+                        <span class="icon">👴</span>
+                        <h4>גיל ממוצע בצוות</h4>
+                        <p><strong>Biosense:</strong> "מה זה Docker?"</p>
+                        <p><strong>Voxela:</strong> "מה זה CD? הכל ב-Spotify!"</p>
+                    </div>
+                    <div class="icon-item">
+                        <span class="icon">🏢</span>
+                        <h4>תרבות ארגונית</h4>
+                        <p><strong>Biosense:</strong> 47 אישורים לשנות שורת קוד</p>
+                        <p><strong>Voxela:</strong> Push to main? YOLO! 🚀</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fun-fact">
+                <strong>ידעת?</strong> בזמן שלוקח ל-Biosense לקמפל את הפרויקט, אפשר:
+                <ul>
+                    <li>☕ להכין קפה (ולשתות אותו)</li>
+                    <li>🍕 להזמין פיצה (ולאכול אותה)</li>
+                    <li>✈️ לטוס לאילת (כמעט)</li>
+                    <li>🎓 לסיים קורס Python ב-Udemy</li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h4>😈 סימנים שהגיע הזמן לעזוב:</h4>
+                <ul>
+                    <li>אתה עדיין כותב <code>delete[]</code> ב-2025</li>
+                    <li>ה-IDE שלך זוכר את Windows XP</li>
+                    <li>יש לכם "מומחה CMake" בצוות (ואף אחד לא מבין מה הוא עושה)</li>
+                    <li>הבאג האחרון שתיקנת היה segmentation fault</li>
+                    <li>אתה מקנא במפתחי JavaScript שיש להם <code>undefined</code> במקום <code>nullptr</code></li>
+                </ul>
+            </div>
+
+            <div style="text-align: center; margin-top: 30px; padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 15px;">
+                <h3 style="color: white; border: none;">🚀 ההזדמנות שלך</h3>
+                <p style="font-size: 1.1em;">
+                    לצאת מעולם ה-Legacy Code ולהיכנס לעולם שבו:
+                </p>
+                <ul style="list-style: none; font-size: 1.1em;">
+                    <li>✨ אין memory leaks (Python מנקה אחריך!)</li>
+                    <li>🎯 יש package manager שעובד (pip > make)</li>
+                    <li>🌈 הError messages באמת מסבירים מה הבעיה</li>
+                    <li>🎉 Deploy לproduction זה לא אירוע מתוח של 3 ימים</li>
+                </ul>
+            </div>
+
+            <div class="motivation-box" style="background: #e8f5e9; border-color: #4caf50;">
+                <strong>אבל ברצינות עידן...</strong>
+                <p>הניסיון שלך ב-Biosense נתן לך בסיס מעולה - אתה מבין מערכות מורכבות ויודע לכתוב קוד איכותי.</p>
+                <p>עכשיו הגיע הזמן לקחת את הכישורים האלה למקום שבו תוכל לעוף! 🚀</p>
+            </div>
+        </div>
+
+        <!-- Slide 2: מבוא לתכנות Backend ו-Frontend -->
         <div class="slide">
             <div class="header-logo">
                 <span class="logo-bars">
@@ -509,422 +656,518 @@
                 </span>
                 <span style="margin-right: 8px; font-weight: bold;">VOXELA</span>
             </div>
-            <h2>🎯 מה מחכה לך?</h2>
+            
+            <h2>🎭 Backend vs Frontend - שני צדדים של אותו מטבע</h2>
+            
+            <div class="motivation-box">
+                <strong>למה חשוב להבין את ההבדל?</strong>
+                <p>כדי לבנות אפליקציה מלאה, צריך להבין איך שני החלקים האלה עובדים יחד!</p>
+            </div>
+
             <div class="icon-grid">
                 <div class="icon-item">
-                    <span class="icon">⏱️</span>
-                    <strong>4 שבועות</strong>
-                    <p>160 שעות של למידה אינטנסיבית</p>
+                    <span class="icon">🔧</span>
+                    <h3>Backend</h3>
+                    <p><strong>המוח של האפליקציה</strong></p>
+                    <ul style="text-align: right; list-style: none;">
+                        <li>• מנהל את הלוגיקה העסקית</li>
+                        <li>• מתקשר עם מסד הנתונים</li>
+                        <li>• מאמת משתמשים</li>
+                        <li>• מחשב ומעבד נתונים</li>
+                    </ul>
                 </div>
                 <div class="icon-item">
-                    <span class="icon">💻</span>
-                    <strong>Hands-on</strong>
-                    <p>80% תרגול מעשי</p>
-                </div>
-                <div class="icon-item">
-                    <span class="icon">🏆</span>
-                    <strong>תעודה</strong>
-                    <p>הסמכה בכל שבוע</p>
-                </div>
-                <div class="icon-item">
-                    <span class="icon">🚀</span>
-                    <strong>Production Ready</strong>
-                    <p>מוכן לעבודה אמיתית</p>
+                    <span class="icon">🎨</span>
+                    <h3>Frontend</h3>
+                    <p><strong>הפנים של האפליקציה</strong></p>
+                    <ul style="text-align: right; list-style: none;">
+                        <li>• מה שהמשתמש רואה</li>
+                        <li>• ממשק משתמש (UI)</li>
+                        <li>• חוויית משתמש (UX)</li>
+                        <li>• אינטראקציה ואנימציות</li>
+                    </ul>
                 </div>
             </div>
+
+            <div class="example-box">
+                <h4>🌟 דוגמה פרקטית - התחברות למערכת:</h4>
+                <ol>
+                    <li><strong>Frontend:</strong> המשתמש מזין שם משתמש וסיסמה בטופס יפה</li>
+                    <li><strong>Frontend:</strong> שולח את הנתונים לשרת (Backend)</li>
+                    <li><strong>Backend:</strong> בודק האם הפרטים נכונים במסד הנתונים</li>
+                    <li><strong>Backend:</strong> יוצר טוקן אבטחה ושולח תשובה</li>
+                    <li><strong>Frontend:</strong> מציג הודעת הצלחה או שגיאה</li>
+                </ol>
+            </div>
+
+            <div class="course-box">
+                <h4>🎓 קורסים מומלצים להתחלה:</h4>
+                <ul>
+                    <li><a href="https://www.coursera.org/learn/intro-to-web-dev" target="_blank">Introduction to Web Development - Coursera</a></li>
+                    <li><a href="https://www.udemy.com/course/the-web-developer-bootcamp/" target="_blank">The Web Developer Bootcamp - Udemy</a></li>
+                    <li><a href="https://www.youtube.com/watch?v=zJSY8tbf_ys" target="_blank">Frontend Web Development Bootcamp - YouTube (חינם!)</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 2.5: REST API -->
+        <div class="slide">
+            <h2>🌐 REST API - השפה שבה אפליקציות מדברות</h2>
             
-            <div class="tech-stack">
-                <span class="tech-badge">Python 3.12+</span>
-                <span class="tech-badge">FastAPI</span>
-                <span class="tech-badge">PostgreSQL</span>
-                <span class="tech-badge">Docker</span>
-                <span class="tech-badge">Google Cloud</span>
-                <span class="tech-badge">Terraform</span>
-                <span class="tech-badge">CI/CD</span>
+            <div class="motivation-box">
+                <strong>למה צריך REST API?</strong>
+                <p>דמיין שה-Frontend וה-Backend מדברים בשפות שונות... 🗣️</p>
+                <p>REST API זו השפה המשותפת שמאפשרת להם להבין אחד את השני!</p>
             </div>
 
-            <div class="motivation-quote">
-                "עידן, זכור - כל מפתח גדול התחיל מאיפה שאתה נמצא עכשיו. ההבדל היחיד? הם פשוט התחילו!" 💪
-            </div>
-        </div>
-
-        <!-- Slide 3: שבוע 1 -->
-        <div class="slide">
-            <h2>📅 שבוע 1: Python - השפה שלא צריך `;` בסוף</h2>
-            <div class="week-card">
-                <div class="week-number">1</div>
-                <h3>מה נלמד השבוע?</h3>
-                <ul>
-                    <li>🐍 Python 3.12 - התחביר שישנה את חייך</li>
-                    <li>⚡ Async/Await - כי חיכוי זה לא קול</li>
-                    <li>🌐 יסודות ווב מודרניים</li>
-                    <li>🐳 Docker - הקונטיינר שיכיל את כל הבאגים שלך</li>
-                </ul>
-
-                <div class="code-example">
-# עידן, תראה כמה Python יותר נקי מ-C++!
-def greet_idan():
-    """פונקציה שמברכת את עידן בלי לדאוג לזיכרון"""
-    return "שלום עידן! ברוך הבא ל-Python 🎉"
-
-# אין צורך ב-main(), אין malloc, אין free!
-print(greet_idan())
-                </div>
-
-                <div class="checkpoint">
-                    <strong>✅ משימת סוף שבוע:</strong> בניית REST API פשוט - כן, תוך שבוע אחד! (ב-C++ זה היה לוקח חודש...)
-                </div>
-            </div>
-
-            <div class="course-links">
-                <h4>🎓 קורסים מומלצים לשבוע זה:</h4>
-                <ul>
-                    <li><a href="https://realpython.com/python-type-checking/" target="_blank">Type Hints - כי גם Python יכול להיות מסודר</a></li>
-                    <li><a href="https://www.youtube.com/watch?v=0sOvCWFmrtA" target="_blank">FastAPI Full Course - 5 שעות שישנו את החיים</a></li>
-                    <li><a href="https://docs.docker.com/get-started/" target="_blank">Docker Getting Started - הקונטיינר לכל הצרות</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Slide 4: שבוע 2 -->
-        <div class="slide">
-            <h2>📅 שבוע 2: FastAPI & Databases - כשהקסם קורה</h2>
-            <div class="week-card">
-                <div class="week-number">2</div>
-                <h3>הגיע הזמן לבנות API אמיתי!</h3>
+            <div class="concept-card">
+                <h3>מה זה REST?</h3>
+                <p><strong>REST = REpresentational State Transfer</strong></p>
+                <p>סט של כללים איך לבנות API שקל להבין ולהשתמש בו:</p>
                 
-                <div class="fun-fact">
-                    <strong>טיפ מעידן לעידן:</strong> FastAPI זה כמו Flask על סטרואידים - אותה פשטות, פי 10 יכולות! 💊
-                </div>
-
-                <div class="code-example">
-from fastapi import FastAPI
-from pydantic import BaseModel
-
-app = FastAPI(title="Idan's Amazing API")
-
-class IданMessage(BaseModel):
-    text: str
-    excitement_level: int = 100
-
-@app.post("/idan/says")
-async def idan_speaks(message: IdanMessage):
-    return {"idan_said": f"{message.text} {'!' * message.excitement_level}"}
-
-# Swagger UI בחינם! נסה לעשות את זה ב-C++... 😏
-                </div>
-
-                <h3>🗄️ SQLAlchemy - ה-ORM שיחסוך לך שעות</h3>
-                <ul>
-                    <li>אין יותר כתיבת SQL ידנית</li>
-                    <li>מיגרציות אוטומטיות עם Alembic</li>
-                    <li>Type safety מובנה</li>
-                </ul>
-
-                <div class="checkpoint">
-                    <strong>✅ אתגר השבוע:</strong> הרחבת Voxela API עם פיצ'ר חדש - כן, אתה כבר מוכן!
+                <div class="icon-grid">
+                    <div class="icon-item">
+                        <span class="icon">📍</span>
+                        <h4>URLs ברורים</h4>
+                        <p>/api/users - כל המשתמשים</p>
+                        <p>/api/users/123 - משתמש מספר 123</p>
+                    </div>
+                    <div class="icon-item">
+                        <span class="icon">🔤</span>
+                        <h4>HTTP Methods</h4>
+                        <p>GET - קרא נתונים</p>
+                        <p>POST - צור חדש</p>
+                        <p>PUT - עדכן</p>
+                        <p>DELETE - מחק</p>
+                    </div>
+                    <div class="icon-item">
+                        <span class="icon">📋</span>
+                        <h4>Status Codes</h4>
+                        <p>200 - הצלחה</p>
+                        <p>201 - נוצר בהצלחה</p>
+                        <p>404 - לא נמצא</p>
+                        <p>500 - שגיאת שרת</p>
+                    </div>
+                    <div class="icon-item">
+                        <span class="icon">📦</span>
+                        <h4>JSON Format</h4>
+                        <p>פורמט סטנדרטי</p>
+                        <p>קל לקריאה</p>
+                        <p>נתמך בכל שפה</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="course-links">
-                <h4>🎓 משאבי למידה חיוניים:</h4>
+            <div class="example-box">
+                <h4>🌟 דוגמה מVoxela - ניהול לידים:</h4>
+                <pre style="background: #2d2d2d; color: #f8f8f2; padding: 15px; border-radius: 10px; text-align: left; direction: ltr;">
+# קריאת כל הלידים
+GET /api/v1/leads
+Response: [{"id": 1, "name": "עידן גבאי", "phone": "050-1234567"}]
+
+# יצירת ליד חדש
+POST /api/v1/leads
+Body: {"name": "לקוח חדש", "phone": "052-9876543"}
+Response: {"id": 2, "name": "לקוח חדש", "status": "new"}
+
+# עדכון ליד קיים
+PUT /api/v1/leads/2
+Body: {"status": "contacted"}
+Response: {"id": 2, "name": "לקוח חדש", "status": "contacted"}
+
+# מחיקת ליד
+DELETE /api/v1/leads/2
+Response: {"message": "Lead deleted successfully"}
+                </pre>
+            </div>
+
+            <div class="fun-fact">
+                <strong>ידעת?</strong> REST הומצא על ידי Roy Fielding בשנת 2000 בעבודת הדוקטורט שלו.
+                היום, מעל 70% מה-APIs בעולם משתמשים ב-REST! 🌍
+            </div>
+
+            <div class="course-box">
+                <h4>🎓 משאבי למידה ל-REST API:</h4>
                 <ul>
-                    <li><a href="https://fastapi.tiangolo.com/tutorial/" target="_blank">FastAPI Tutorial - התיעוד הכי טוב בעולם</a></li>
-                    <li><a href="https://docs.sqlalchemy.org/en/20/tutorial/" target="_blank">SQLAlchemy - מסדי נתונים בלי כאב ראש</a></li>
-                    <li><a href="https://jwt.io/introduction" target="_blank">JWT - כי אבטחה זה לא משחק</a></li>
+                    <li><a href="Tutorial_02__Rest_API_v1.pdf" target="_blank" style="color: #d32f2f; font-weight: bold;">
+                        📄 תרגול REST API מהטכניון - מומלץ במיוחד!
+                    </a></li>
+                    <li><a href="https://www.restapitutorial.com/" target="_blank">REST API Tutorial - המדריך המלא</a></li>
+                    <li><a href="https://www.youtube.com/watch?v=SLwpqD8n3d0" target="_blank">REST API Crash Course - YouTube (חינם)</a></li>
+                    <li><a href="https://www.postman.com/postman/workspace/postman-public-workspace/collection/12959542-c8142d51-e97c-46b6-bd77-52bb66712c9a" target="_blank">Postman - תרגול מעשי של APIs</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 3: מבוא לענן -->
+        <div class="slide">
+            <h2>☁️ מהו ענן? ולמה כולם מדברים עליו?</h2>
+            
+            <div class="motivation-box">
+                <strong>למה ענן?</strong>
+                <p>במקום לקנות ולתחזק שרתים יקרים, אנחנו שוכרים כוח מחשוב לפי הצורך!</p>
+                <p>זה כמו ההבדל בין לקנות מכונית לבין להשתמש באובר - משלמים רק על מה שצריך! 🚗</p>
+            </div>
+
+            <div class="concept-card">
+                <h3>📊 משאבי ענן - הלגו של הטכנולוגיה</h3>
+                <p>בענן, אנחנו מרכיבים את האפליקציה שלנו מ"קוביות" מוכנות:</p>
+                
+                <div class="icon-grid">
+                    <div class="icon-item">
+                        <span class="icon">💻</span>
+                        <strong>Compute</strong>
+                        <p>שרתים וירטואליים להרצת קוד</p>
+                    </div>
+                    <div class="icon-item">
+                        <span class="icon">💾</span>
+                        <strong>Storage</strong>
+                        <p>מקום לשמור קבצים ונתונים</p>
+                    </div>
+                    <div class="icon-item">
+                        <span class="icon">🗄️</span>
+                        <strong>Database</strong>
+                        <p>מסדי נתונים מנוהלים</p>
+                    </div>
+                    <div class="icon-item">
+                        <span class="icon">🌐</span>
+                        <strong>Networking</strong>
+                        <p>חיבורים ואבטחה</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="example-box">
+                <h4>🌟 דוגמה מVoxela:</h4>
+                <ul>
+                    <li><strong>Cloud Run:</strong> מריץ את ה-API שלנו, מתרחב אוטומטית לפי עומס</li>
+                    <li><strong>Cloud SQL:</strong> PostgreSQL מנוהל - לא צריך לדאוג לגיבויים!</li>
+                    <li><strong>Secret Manager:</strong> שומר סיסמאות בצורה מאובטחת</li>
+                    <li><strong>Cloud Storage:</strong> מאחסן קבצים וקלטות שיחה</li>
+                </ul>
+            </div>
+
+            <div class="fun-fact">
+                <strong>עובדה מעניינת:</strong> Google Cloud מפעיל מיליוני שרתים ב-35 מרכזי נתונים ברחבי העולם!
+                כשאתה משתמש בענן, אתה מקבל גישה לאותה תשתית שמריצה את Google Search ו-YouTube! 🌍
+            </div>
+        </div>
+
+        <!-- Slide 4: Google Cloud Platform -->
+        <div class="slide">
+            <h2>🌟 Google Cloud Platform - הענן של גוגל</h2>
+            
+            <div class="motivation-box">
+                <strong>למה דווקא Google Cloud?</strong>
+                <ul>
+                    <li>🚀 ביצועים מעולים - אותה תשתית של Google</li>
+                    <li>🛡️ אבטחה ברמה הגבוהה ביותר</li>
+                    <li>💰 תמחור גמיש - משלמים רק על השימוש</li>
+                    <li>🌍 נוכחות גלובלית - שרתים בכל העולם</li>
+                </ul>
+            </div>
+
+            <div class="concept-card">
+                <h3>🏗️ השירותים המרכזיים שנשתמש בהם:</h3>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4>1. Cloud Run</h4>
+                        <p>שירות Serverless - מריץ קונטיינרים בלי לנהל שרתים</p>
+                        <small>מתאים מאוד ל-API שלנו!</small>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>2. Cloud SQL</h4>
+                        <p>PostgreSQL מנוהל - מסד נתונים ללא כאב ראש</p>
+                        <small>גיבויים אוטומטיים, סקיילינג קל</small>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>3. Cloud Build</h4>
+                        <p>CI/CD - בונה ופורס את הקוד אוטומטית</p>
+                        <small>כל push ל-GitHub מעדכן את האפליקציה!</small>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>4. Secret Manager</h4>
+                        <p>ניהול סודות - סיסמאות ומפתחות API</p>
+                        <small>אבטחה ברמה הגבוהה ביותר</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="course-box">
+                <h4>🎓 מסלול למידה מומלץ ל-Google Cloud:</h4>
+                <ul>
+                    <li><a href="https://www.coursera.org/professional-certificates/cloud-engineering-gcp" target="_blank">Google Cloud Professional Certificate - Coursera (מתחילים)</a></li>
+                    <li><a href="https://cloud.google.com/training/cloud-infrastructure" target="_blank">Cloud Infrastructure Learning Path - Google (חינם!)</a></li>
+                    <li><a href="https://www.youtube.com/watch?v=JIbIYCM48to" target="_blank">GCP Full Course for Beginners - YouTube (חינם, 4 שעות)</a></li>
+                    <li><a href="https://acloudguru.com/course/google-cloud-certified-associate-cloud-engineer" target="_blank">Associate Cloud Engineer - A Cloud Guru (מתקדמים)</a></li>
                 </ul>
             </div>
 
             <div class="progress-bar">
-                <div class="progress-fill" style="width: 50%;">50% - חצי דרך עידן! 🎯</div>
+                <div class="progress-fill" style="width: 25%;">25% - יסודות הענן ✅</div>
             </div>
         </div>
 
-        <!-- Slide 4.5: מסדי נתונים ו-CAP Theorem -->
+        <!-- Slide 5: קונטיינרים ו-Docker -->
         <div class="slide">
-            <h2>🗄️ צלילה עמוקה למסדי נתונים - PostgreSQL 17</h2>
+            <h2>📦 Docker וקונטיינרים - המהפכה בפיתוח</h2>
             
-            <div class="fun-fact">
-                <strong>עידן, ידעת?</strong> PostgreSQL נקרא "הפיל" בגלל הלוגו שלו, והוא חזק כמו פיל! 🐘
+            <div class="motivation-box">
+                <strong>הבעיה הקלאסית:</strong>
+                <p>"אבל זה עובד לי על המחשב!" 😅</p>
+                <p>Docker פותר את זה - אורז את האפליקציה עם כל מה שהיא צריכה!</p>
             </div>
 
-            <h3>🎯 מה זה CAP Theorem? (עידן, זה חשוב!)</h3>
-            <div style="background: #f0f8ff; padding: 20px; border-radius: 15px; margin: 20px 0;">
-                <p style="font-size: 1.1em; text-align: center; margin-bottom: 20px;">
-                    <strong>CAP = Consistency + Availability + Partition Tolerance</strong>
-                </p>
-                <p style="text-align: center; color: #d32f2f; font-weight: bold;">
-                    אבל... אפשר לבחור רק 2 מתוך 3! 😱
-                </p>
-            </div>
-
-            <div class="icon-grid">
-                <div class="icon-item" style="background: #e3f2fd;">
-                    <span class="icon">🎯</span>
-                    <strong>Consistency</strong>
-                    <p>כל הקריאות מחזירות את הנתון העדכני ביותר</p>
-                    <small>כמו שכולם רואים את אותו הסטטוס בפייסבוק</small>
-                </div>
-                <div class="icon-item" style="background: #e8f5e9;">
-                    <span class="icon">✅</span>
-                    <strong>Availability</strong>
-                    <p>המערכת תמיד זמינה ומגיבה</p>
-                    <small>האתר עובד 24/7 בלי downtime</small>
-                </div>
-                <div class="icon-item" style="background: #fff3e0;">
-                    <span class="icon">🔗</span>
-                    <strong>Partition Tolerance</strong>
-                    <p>המערכת ממשיכה לעבוד גם אם חלק מהרשת נופל</p>
-                    <small>כמו WhatsApp שעובד גם כשחלק מהשרתים למטה</small>
-                </div>
-            </div>
-
-            <h3>🐘 למה PostgreSQL? (ולמה Cloud SQL?)</h3>
-            <div class="week-card" style="background: linear-gradient(135deg, #336791 0%, #4a90e2 100%); color: white;">
-                <h4 style="color: white;">PostgreSQL 17 + Cloud SQL = ❤️</h4>
-                <ul style="color: white;">
-                    <li><strong>ACID Compliant:</strong> עידן, הטרנזקציות שלך בטוחות כמו בבנק!</li>
-                    <li><strong>JSON Support:</strong> NoSQL בתוך SQL - המיטב משני העולמות</li>
-                    <li><strong>Full Text Search:</strong> חיפוש טקסט מהיר בלי Elasticsearch</li>
-                    <li><strong>Cloud SQL Managed:</strong> Google מטפל בגיבויים, אבטחה ו-scaling</li>
+            <div class="concept-card">
+                <h3>מה זה קונטיינר?</h3>
+                <p>דמיין קופסה שמכילה:</p>
+                <ul>
+                    <li>🎯 הקוד שלך</li>
+                    <li>📚 כל הספריות הנדרשות</li>
+                    <li>⚙️ הגדרות הסביבה</li>
+                    <li>🔧 כלי העזר הנחוצים</li>
                 </ul>
-
-                <div class="code-example" style="background: #1e1e1e;">
--- עידן, תראה כמה PostgreSQL מגניב!
-CREATE TABLE idan_leads (
-    id SERIAL PRIMARY KEY,
-    name TEXT NOT NULL,
-    data JSONB,  -- JSONB = JSON Binary, מהיר ומאונדקס!
-    created_at TIMESTAMPTZ DEFAULT NOW(),
-    search_vector tsvector GENERATED ALWAYS AS 
-        (to_tsvector('hebrew', name)) STORED
-);
-
--- אינדקס על JSON field - משהו שב-MySQL קשה יותר
-CREATE INDEX idx_data_email ON idan_leads ((data->>'email'));
-
--- Full text search בעברית!
-SELECT * FROM idan_leads 
-WHERE search_vector @@ to_tsquery('hebrew', 'עידן');
-                </div>
+                <p><strong>התוצאה:</strong> האפליקציה רצה זהה בכל מקום!</p>
             </div>
 
-            <h3>🎨 PostgreSQL במודל CAP</h3>
-            <div style="text-align: center; margin: 20px 0;">
-                <div style="display: inline-block; background: #f5f5f5; padding: 30px; border-radius: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
-                    <h4>PostgreSQL בוחר: <span style="color: #4caf50;">Consistency</span> + <span style="color: #2196f3;">Availability</span></h4>
-                    <p style="margin-top: 15px;">במחיר של: פחות Partition Tolerance</p>
-                    <p style="font-size: 0.9em; color: #666; margin-top: 10px;">
-                        (אבל Cloud SQL מפצה על זה עם replication אוטומטי!)
-                    </p>
-                </div>
+            <div class="example-box">
+                <h4>🌟 דוגמה מVoxela:</h4>
+                <p>יש לנו 3 קונטיינרים עיקריים:</p>
+                <ol>
+                    <li><strong>API Container:</strong> מכיל את FastAPI והתלויות שלו</li>
+                    <li><strong>Database Container:</strong> PostgreSQL מוכן לשימוש</li>
+                    <li><strong>Test Container:</strong> סביבת בדיקות מבודדת</li>
+                </ol>
+                <p>עם פקודה אחת - <code>docker-compose up</code> - הכל עולה!</p>
             </div>
 
             <div class="fun-fact">
-                <strong>טיפ פרו מעידן לעידן:</strong> אם אתה צריך Partition Tolerance מלא, תסתכל על Cassandra או DynamoDB. 
-                אבל ל-99% מהמקרים, PostgreSQL עם Cloud SQL יעשה את העבודה מצוין! 💪
+                <strong>אתה יודע ש...</strong> Docker שינה את עולם הפיתוח כל כך, שהלוגו שלו (לוויתן עם קונטיינרים על הגב) הפך לאחד המוכרים בתעשייה! 🐳
             </div>
 
-            <h3>🚀 פיצ'רים מיוחדים ב-PostgreSQL 17</h3>
-            <div class="tech-stack">
-                <span class="tech-badge">Parallel Queries</span>
-                <span class="tech-badge">Native Partitioning</span>
-                <span class="tech-badge">Logical Replication</span>
-                <span class="tech-badge">BRIN Indexes</span>
-                <span class="tech-badge">Row Level Security</span>
-            </div>
-
-            <div class="checkpoint">
-                <strong>✅ משימה מיוחדת לעידן:</strong> 
+            <div class="course-box">
+                <h4>🎓 קורסים לDocker:</h4>
                 <ul>
-                    <li>צור טבלה עם JSONB column</li>
-                    <li>הוסף Full Text Search בעברית</li>
-                    <li>כתוב query שמשתמש ב-Window Functions</li>
-                    <li>נסה לשבור את ה-ACID properties (רמז: לא תצליח! 😄)</li>
-                </ul>
-            </div>
-
-            <div class="course-links">
-                <h4>🎓 משאבים לעידן שרוצה להעמיק:</h4>
-                <ul>
-                    <li><a href="https://www.postgresql.org/docs/17/index.html" target="_blank">PostgreSQL 17 Documentation - התנ"ך החדש</a></li>
-                    <li><a href="https://cloud.google.com/sql/docs/postgres" target="_blank">Cloud SQL for PostgreSQL - הענן שלך</a></li>
-                    <li><a href="https://www.youtube.com/watch?v=qI_g07C_Q5I" target="_blank">CAP Theorem Explained - 12 דקות שישנו את החיים</a></li>
-                    <li><a href="https://pgexercises.com/" target="_blank">PostgreSQL Exercises - תרגול אינטראקטיבי</a></li>
+                    <li><a href="Tutorial_03__Docker_v1.pdf" target="_blank" style="color: #d32f2f; font-weight: bold;">
+                        📄 תרגול Docker מהטכניון - התחל מכאן!
+                    </a></li>
+                    <li><a href="https://www.udemy.com/course/docker-and-kubernetes-the-complete-guide/" target="_blank">Docker and Kubernetes Complete Guide - Udemy</a></li>
+                    <li><a href="https://www.youtube.com/watch?v=fqMOX6JJhGo" target="_blank">Docker Tutorial for Beginners - YouTube (חינם, 2.5 שעות)</a></li>
+                    <li><a href="https://docs.docker.com/get-started/" target="_blank">Docker Official Tutorial - Docker Docs (חינם)</a></li>
                 </ul>
             </div>
         </div>
 
-        <!-- Slide 5: שבוע 3 -->
+        <!-- Slide 6: Testing - למה ואיך -->
         <div class="slide">
-            <h2>📅 שבוע 3: Cloud & DevOps - עכשיו אתה DevOps Engineer!</h2>
-            <div class="week-card">
-                <div class="week-number">3</div>
-                
-                <div class="fun-fact">
-                    <strong>סוד קטן:</strong> 90% מה-DevOps זה לדעת איך לגגל את השגיאות הנכונות 🔍
-                </div>
+            <h2>🧪 Testing - כי באגים זה לא כיף</h2>
+            
+            <div class="motivation-box">
+                <strong>למה לכתוב טסטים?</strong>
+                <p>דמיין שאתה משנה קוד ופתאום משהו אחר נשבר... 😱</p>
+                <p>טסטים הם רשת הביטחון שלך - הם מוודאים שהכל עובד!</p>
+            </div>
 
-                <h3>☁️ Google Cloud Platform</h3>
+            <div class="concept-card">
+                <h3>🎯 סוגי טסטים בVoxela:</h3>
+                
                 <div class="icon-grid">
                     <div class="icon-item">
-                        <span class="icon">🏃</span>
-                        <strong>Cloud Run</strong>
-                        <p>Deploy בלחיצת כפתור</p>
+                        <span class="icon">🔍</span>
+                        <h4>Unit Tests</h4>
+                        <p>בודקים פונקציה בודדת</p>
+                        <small>מהירים, פשוטים, הרבה!</small>
                     </div>
                     <div class="icon-item">
-                        <span class="icon">🗄️</span>
-                        <strong>Cloud SQL</strong>
-                        <p>PostgreSQL מנוהל</p>
+                        <span class="icon">🔗</span>
+                        <h4>Integration Tests</h4>
+                        <p>בודקים איך חלקים עובדים יחד</p>
+                        <small>API + Database</small>
                     </div>
                     <div class="icon-item">
-                        <span class="icon">🔐</span>
-                        <strong>Secret Manager</strong>
-                        <p>סודות במקום בטוח</p>
-                    </div>
-                    <div class="icon-item">
-                        <span class="icon">📊</span>
-                        <strong>Monitoring</strong>
-                        <p>לדעת מתי הכל נשבר</p>
+                        <span class="icon">🌐</span>
+                        <h4>E2E Tests</h4>
+                        <p>בודקים את כל המערכת</p>
+                        <small>מהUI עד הDB</small>
                     </div>
                 </div>
+            </div>
 
-                <h3>🏗️ Terraform - Infrastructure as Code</h3>
-                <div class="code-example">
-# עידן, תראה כמה קל להקים תשתית!
-resource "google_cloud_run_service" "idan_api" {
-  name     = "idan-awesome-api"
-  location = "us-central1"
+            <div class="example-box">
+                <h4>🌟 דוגמה מעשית - בדיקת התחברות:</h4>
+                <ol>
+                    <li><strong>Unit Test:</strong> בודק שהפונקציה להצפנת סיסמה עובדת</li>
+                    <li><strong>Integration Test:</strong> בודק שניתן לשמור משתמש ב-DB</li>
+                    <li><strong>E2E Test:</strong> בודק את כל התהליך מהטופס עד ההתחברות</li>
+                </ol>
+            </div>
+
+            <div class="fun-fact">
+                <strong>טיפ מקצועי:</strong> בVoxela יש לנו מעל 40 טסטים אוטומטיים! 
+                כל פעם שמישהו משנה קוד, כל הטסטים רצים ומוודאים שהכל תקין 🎯
+            </div>
+
+            <div class="course-box">
+                <h4>🎓 קורסים לTesting:</h4>
+                <ul>
+                    <li><a href="https://testautomationu.applitools.com/python-tutorial/" target="_blank">Python Testing 101 - Test Automation University (חינם)</a></li>
+                    <li><a href="https://www.udemy.com/course/automated-software-testing-with-python/" target="_blank">Automated Testing with Python - Udemy</a></li>
+                    <li><a href="https://www.youtube.com/watch?v=6tNS--WetLI" target="_blank">Python Testing Tutorial - YouTube (חינם)</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 7: CI/CD -->
+        <div class="slide">
+            <h2>🔄 CI/CD - אוטומציה של תהליך הפיתוח</h2>
+            
+            <div class="motivation-box">
+                <strong>הבעיה:</strong>
+                <p>פריסה ידנית = שגיאות, זמן מבוזבז, וסטרס 😰</p>
+                <p><strong>הפתרון:</strong> CI/CD - המחשב עושה את העבודה בשבילך!</p>
+            </div>
+
+            <div class="concept-card">
+                <h3>מה זה CI/CD?</h3>
+                <ul>
+                    <li><strong>CI = Continuous Integration</strong>
+                        <p>כל קוד חדש נבדק אוטומטית</p>
+                    </li>
+                    <li><strong>CD = Continuous Deployment</strong>
+                        <p>קוד שעובר בדיקות נפרס אוטומטית</p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h4>🌟 התהליך בVoxela:</h4>
+                <ol>
+                    <li>עידן דוחף קוד ל-GitHub 📤</li>
+                    <li>Cloud Build מזהה את השינוי 👀</li>
+                    <li>בונה Docker image חדש 📦</li>
+                    <li>מריץ את כל הטסטים 🧪</li>
+                    <li>אם הכל עובד - פורס לענן! ☁️</li>
+                </ol>
+                <p><strong>זמן כולל: 5 דקות במקום שעה של עבודה ידנית!</strong></p>
+            </div>
+
+            <div class="fun-fact">
+                <strong>ידעת?</strong> חברות כמו Amazon פורסות קוד חדש כל 11.6 שניות בממוצע!
+                זה אפשרי רק בזכות CI/CD מתקדם 🚀
+            </div>
+
+            <div class="course-box">
+                <h4>🎓 קורסים לCI/CD:</h4>
+                <ul>
+                    <li><a href="https://www.coursera.org/learn/continuous-integration" target="_blank">Continuous Integration - Coursera</a></li>
+                    <li><a href="https://www.youtube.com/watch?v=scEDHsr3APg" target="_blank">CI/CD Tutorial - YouTube (חינם)</a></li>
+                    <li><a href="https://cloud.google.com/build/docs/quickstart-build" target="_blank">Cloud Build Quickstart - Google (חינם)</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 8: Terraform ותשתית כקוד -->
+        <div class="slide">
+            <h2>🏗️ Terraform - תשתית כקוד</h2>
+            
+            <div class="motivation-box">
+                <strong>דמיין שצריך להקים 50 שרתים...</strong>
+                <p>לעשות את זה ידנית? זה יקח ימים ויהיו טעויות! 😫</p>
+                <p>עם Terraform - כותבים קוד פעם אחת, והכל נבנה אוטומטית! ✨</p>
+            </div>
+
+            <div class="concept-card">
+                <h3>מה זה Infrastructure as Code?</h3>
+                <p>במקום ללחוץ על כפתורים בממשק, כותבים קוד שמתאר את התשתית:</p>
+                <ul>
+                    <li>📝 הכל מתועד בקוד</li>
+                    <li>🔄 אפשר לשחזר בקלות</li>
+                    <li>📊 ניהול גרסאות כמו קוד רגיל</li>
+                    <li>🤝 כמה אנשים יכולים לעבוד יחד</li>
+                </ul>
+            </div>
+
+            <div class="example-box">
+                <h4>🌟 דוגמה מVoxela:</h4>
+                <pre style="background: #2d2d2d; color: #f8f8f2; padding: 15px; border-radius: 10px;">
+resource "google_cloud_run_service" "api" {
+  name     = "voxela-api"
+  location = "us-east5"
   
   template {
     spec {
       containers {
-        image = "gcr.io/idan-project/voxela-api"
+        image = "gcr.io/voxela/api:latest"
         
-        env {
-          name  = "DEVELOPER"
-          value = "IDAN_THE_GREAT"
+        resources {
+          limits = {
+            memory = "512Mi"
+            cpu    = "1"
+          }
         }
       }
     }
   }
 }
-
-# בום! יש לך שרת בענן 🚀
-                </div>
-
-                <div class="checkpoint">
-                    <strong>✅ פרויקט השבוע:</strong> פריסת האפליקציה שלך ל-Production עם CI/CD מלא!
-                </div>
+                </pre>
+                <p>20 שורות קוד = API שלם בענן! 🎉</p>
             </div>
 
-            <div class="course-links">
-                <h4>🎓 למידה נוספת:</h4>
+            <div class="course-box">
+                <h4>🎓 קורסים לTerraform:</h4>
                 <ul>
-                    <li><a href="https://cloud.google.com/docs/overview" target="_blank">GCP Fundamentals - הענן שלך</a></li>
-                    <li><a href="https://developer.hashicorp.com/terraform/tutorials" target="_blank">Terraform - קוד שבונה תשתיות</a></li>
-                    <li><a href="https://docs.github.com/en/actions" target="_blank">GitHub Actions - אוטומציה בכיף</a></li>
+                    <li><a href="https://www.terraform.io/docs/tutorials/index.html" target="_blank">Terraform Tutorials - HashiCorp (חינם)</a></li>
+                    <li><a href="https://www.udemy.com/course/terraform-beginner-to-advanced/" target="_blank">Terraform Beginner to Advanced - Udemy</a></li>
+                    <li><a href="https://www.youtube.com/watch?v=7xngnjfIlK4" target="_blank">Terraform Course - YouTube (חינם, 2.5 שעות)</a></li>
                 </ul>
             </div>
         </div>
 
-        <!-- Slide 6: שבוע 4 -->
+        <!-- Slide 9: תוכנית לימודים מפורטת -->
         <div class="slide">
-            <h2>📅 שבוע 4: Advanced Topics - עידן, אתה כבר Senior!</h2>
-            <div class="week-card">
-                <div class="week-number">4</div>
-                
-                <h3>🎨 Design Patterns & Best Practices</h3>
+            <h2>📚 תוכנית הלימודים שלך - 4 שבועות להצלחה</h2>
+            
+            <div class="concept-card">
+                <h3>🗓️ שבוע 1: יסודות</h3>
                 <ul>
-                    <li>🏗️ Service Layer Architecture</li>
-                    <li>📦 Repository Pattern</li>
-                    <li>⚡ Event-Driven Architecture</li>
-                    <li>💾 Caching Strategies</li>
+                    <li>✅ Python בסיסי (אם צריך)</li>
+                    <li>✅ הבנת Backend vs Frontend</li>
+                    <li>✅ מבוא ל-REST APIs</li>
+                    <li>✅ Git ו-GitHub</li>
                 </ul>
-
-                <div class="fun-fact">
-                    <strong>חוכמת חיים:</strong> "Premature optimization is the root of all evil" - אבל עכשיו אתה כבר יודע מתי לאופטמז! 🎯
-                </div>
-
-                <h3>🧪 Testing Like a Pro</h3>
-                <div class="code-example">
-import pytest
-from unittest.mock import Mock
-
-# עידן, בדיקות זה לא רק ל-QA!
-@pytest.fixture
-def idan_client():
-    """Fixture שיוצר client מיוחד לעידן"""
-    return TestClient(app, headers={"X-Developer": "Idan"})
-
-async def test_idan_can_create_amazing_features(idan_client):
-    response = await idan_client.post("/api/features", 
-        json={"name": "Idan's Cool Feature", "awesomeness": 9000})
-    
-    assert response.status_code == 201
-    assert response.json()["creator"] == "The Great Idan"
-    
-# TDD - Test Driven Idan! 🎪
-                </div>
-
-                <h3>🚀 הפרויקט הסופי שלך</h3>
-                <div class="checkpoint">
-                    <strong>מערכת Lead Scoring עם ML:</strong>
-                    <ul>
-                        <li>✨ אלגוריתם חכם לניקוד לידים</li>
-                        <li>⚡ Caching לביצועים מטורפים</li>
-                        <li>🔐 אבטחה ברמת Production</li>
-                        <li>📊 Dashboard מרשים</li>
-                    </ul>
-                </div>
+                
+                <h3>🗓️ שבוע 2: Docker וענן</h3>
+                <ul>
+                    <li>☁️ יסודות Cloud Computing</li>
+                    <li>🐳 Docker - קונטיינרים</li>
+                    <li>🌟 Google Cloud Platform - הכרות</li>
+                    <li>🔧 Cloud Run ו-Cloud SQL</li>
+                </ul>
+                
+                <h3>🗓️ שבוע 3: פיתוח ובדיקות</h3>
+                <ul>
+                    <li>🧪 כתיבת טסטים ב-Python</li>
+                    <li>🔄 CI/CD עם Cloud Build</li>
+                    <li>📊 Monitoring וLogging</li>
+                    <li>🔐 Security Best Practices</li>
+                </ul>
+                
+                <h3>🗓️ שבוע 4: תשתית מתקדמת</h3>
+                <ul>
+                    <li>🏗️ Terraform - Infrastructure as Code</li>
+                    <li>🚀 Production Best Practices</li>
+                    <li>📈 Performance Optimization</li>
+                    <li>🎯 פרויקט סיום - Deploy מלא!</li>
+                </ul>
             </div>
 
             <div class="progress-bar">
-                <div class="progress-fill" style="width: 100%;">100% - עידן, עשית את זה! 🎉🎊</div>
+                <div class="progress-fill" style="width: 75%;">75% - כמעט שם! 💪</div>
             </div>
         </div>
 
-        <!-- Slide 7: טיפים והמלצות -->
-        <div class="slide">
-            <h2>💡 טיפים מנצחים לעידן</h2>
-            
-            <h3>🎯 מ-C++ ל-Python - מה חשוב לזכור</h3>
-            <div class="icon-grid">
-                <div class="icon-item">
-                    <span class="icon">🧠</span>
-                    <strong>Memory? What Memory?</strong>
-                    <p>Python מנהל הכל - תתרכז בלוגיקה!</p>
-                </div>
-                <div class="icon-item">
-                    <span class="icon">🐍</span>
-                    <strong>Pythonic Thinking</strong>
-                    <p>List comprehensions הם החברים שלך</p>
-                </div>
-                <div class="icon-item">
-                    <span class="icon">📐</span>
-                    <strong>Indentation Matters</strong>
-                    <p>4 רווחים, לא טאבים - זה דת!</p>
-                </div>
-                <div class="icon-item">
-                    <span class="icon">🎨</span>
-                    <strong>Keep It Simple</strong>
-                    <p>"Explicit is better than implicit"</p>
-                </div>
-            </div>
-
-            <h3>📚 ספרים שישדרגו אותך</h3>
-            <ul>
-                <li>📖 "FastAPI Modern Python Web Development" - הביבליה של FastAPI</li>
-                <li>📖 "Architecture Patterns with Python" - ארכיטקטורה ברמה אחרת</li>
-                <li>📖 "Designing Data-Intensive Applications" - חובה לכל מפתח Backend</li>
-            </ul>
-
-            <div class="motivation-quote">
-                "עידן, תזכור - כל באג שאתה פותר היום הופך אותך למפתח טוב יותר מחר. וב-Python, לפחות תקבל הודעת שגיאה ברורה!" 😄
-            </div>
-        </div>
-
-        <!-- Slide 8: סיכום וקריאה לפעולה -->
+        <!-- Slide 10: סיכום וקריאה לפעולה -->
         <div class="slide">
             <div class="final-cta">
                 <div class="voxela-logo" style="color: white; margin-bottom: 30px;">
@@ -935,39 +1178,47 @@ async def test_idan_can_create_amazing_features(idan_client):
                     </span>
                     <span style="margin-right: 15px;">VOXELA</span>
                 </div>
-                <h2>🎊 עידן, אתה מוכן להתחיל!</h2>
+                
+                <h2>🎊 עידן, המסע שלך מתחיל עכשיו!</h2>
+                
                 <p style="font-size: 1.2em; margin: 20px 0;">
-                    4 שבועות מהיום, תהיה מפתח Full-Stack מקצועי עם ידע ב:
+                    בעוד חודש, תהיה מסוגל:
                 </p>
+                
                 <div class="tech-stack" style="justify-content: center;">
-                    <span class="tech-badge" style="background: white; color: #667eea;">Python Expert</span>
-                    <span class="tech-badge" style="background: white; color: #667eea;">FastAPI Master</span>
-                    <span class="tech-badge" style="background: white; color: #667eea;">Cloud Architect</span>
-                    <span class="tech-badge" style="background: white; color: #667eea;">DevOps Pro</span>
+                    <span class="tech-badge" style="background: white; color: #667eea;">לפתח ב-Backend</span>
+                    <span class="tech-badge" style="background: white; color: #667eea;">לעבוד עם Docker</span>
+                    <span class="tech-badge" style="background: white; color: #667eea;">לנהל תשתית בענן</span>
+                    <span class="tech-badge" style="background: white; color: #667eea;">לכתוב טסטים</span>
+                    <span class="tech-badge" style="background: white; color: #667eea;">להקים CI/CD</span>
                 </div>
                 
-                <h3 style="color: white; margin: 30px 0;">המסע שלך מתחיל עכשיו!</h3>
+                <h3 style="color: white; margin: 30px 0;">הצעדים הראשונים שלך:</h3>
                 
                 <div style="background: rgba(255,255,255,0.2); padding: 20px; border-radius: 15px; margin: 20px 0;">
-                    <h4 style="color: white;">✅ הצעדים הראשונים שלך:</h4>
                     <ol style="text-align: right; padding-right: 20px; font-size: 1.1em;">
-                        <li>התקן Python 3.12 ו-VS Code</li>
-                        <li>צור סביבה וירטואלית ראשונה</li>
-                        <li>Clone את ה-repo של Voxela</li>
-                        <li>הרץ את הבדיקות - ותחגוג כשהן עוברות!</li>
+                        <li>הירשם ל-Google Cloud (יש 300$ קרדיט חינם!) ☁️</li>
+                        <li>התקן Docker Desktop 🐳</li>
+                        <li>צור חשבון GitHub אם אין לך 📦</li>
+                        <li>התחל עם הקורס הראשון ב-GCP! 🚀</li>
                     </ol>
                 </div>
                 
-                <a href="#" class="cta-button">בוא נתחיל! 🚀</a>
-            </div>
-
-            <div class="motivation-quote" style="margin-top: 30px;">
-                <strong>"The best time to plant a tree was 20 years ago. The second best time is now."</strong><br>
-                <span style="font-size: 0.9em;">- חכמה סינית עתיקה (שכנראה נכתבה ב-Python)</span>
+                <div style="margin-top: 30px;">
+                    <p style="font-size: 1.3em; font-weight: bold;">
+                        "The best time to learn cloud was 5 years ago.<br>
+                        The second best time is now." 🌟
+                    </p>
+                </div>
+                
+                <a href="https://console.cloud.google.com/freetrial" target="_blank" class="cta-button">
+                    התחל עם Google Cloud עכשיו! 🚀
+                </a>
             </div>
 
             <div class="fun-fact" style="margin-top: 30px;">
-                <strong>P.S. עידן:</strong> שמעתי שמפתחי Python מקבלים משכורות יותר גבוהות ממפתחי C++... just saying 😉💰
+                <strong>זכור עידן:</strong> כל מומחה התחיל בדיוק איפה שאתה עכשיו. 
+                ההבדל היחיד? הם פשוט התחילו! אתה הבא בתור 💪
             </div>
         </div>
     </div>
