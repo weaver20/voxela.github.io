@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מסע ההכשרה של עידן גבאי - Voxela API</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .voxela-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #1a1a1a;
+            margin: 20px 0;
+            animation: logoFadeIn 1s ease-out;
+        }
+
+        @keyframes logoFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .voxela-logo .logo-bars {
+            display: flex;
+            align-items: center;
+            margin-left: 10px;
+            gap: 3px;
+        }
+
+        .voxela-logo .bar {
+            width: 4px;
+            background: #667eea;
+            border-radius: 2px;
+            animation: barPulse 2s infinite ease-in-out;
+        }
+
+        .voxela-logo .bar:nth-child(1) {
+            height: 20px;
+            animation-delay: 0s;
+        }
+
+        .voxela-logo .bar:nth-child(2) {
+            height: 30px;
+            animation-delay: 0.2s;
+        }
+
+        .voxela-logo .bar:nth-child(3) {
+            height: 40px;
+            animation-delay: 0.4s;
+        }
+
+        @keyframes barPulse {
+            0%, 100% {
+                transform: scaleY(1);
+                opacity: 0.8;
+            }
+            50% {
+                transform: scaleY(1.2);
+                opacity: 1;
+            }
+        }
+
+        .header-logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            opacity: 0.9;
+        }
+
+        .header-logo .logo-bars {
+            display: flex;
+            align-items: center;
+            margin-left: 5px;
+            gap: 2px;
+        }
+
+        .header-logo .bar {
+            width: 3px;
+            background: #667eea;
+            border-radius: 1.5px;
+        }
+
+        .header-logo .bar:nth-child(1) { height: 12px; }
+        .header-logo .bar:nth-child(2) { height: 18px; }
+        .header-logo .bar:nth-child(3) { height: 24px; }
+
+        .presentation-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .slide {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            opacity: 0;
+            transform: translateY(50px);
+            animation: slideIn 0.6s forwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slide:nth-child(1) { animation-delay: 0.1s; }
+        .slide:nth-child(2) { animation-delay: 0.2s; }
+        .slide:nth-child(3) { animation-delay: 0.3s; }
+        .slide:nth-child(4) { animation-delay: 0.4s; }
+        .slide:nth-child(5) { animation-delay: 0.5s; }
+        .slide:nth-child(6) { animation-delay: 0.6s; }
+        .slide:nth-child(7) { animation-delay: 0.7s; }
+        .slide:nth-child(8) { animation-delay: 0.8s; }
+
+        h1 {
+            color: #667eea;
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-align: center;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        h2 {
+            color: #764ba2;
+            font-size: 2em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #667eea;
+            font-size: 1.5em;
+            margin: 20px 0 10px 0;
+        }
+
+        .welcome-message {
+            text-align: center;
+            font-size: 1.3em;
+            color: #555;
+            margin: 20px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+        }
+
+        .emoji {
+            font-size: 1.5em;
+            margin: 0 5px;
+            display: inline-block;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .week-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            position: relative;
+            transition: transform 0.3s;
+        }
+
+        .week-card:hover {
+            transform: translateX(-10px);
+            box-shadow: 5px 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .week-number {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background: #667eea;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .tech-badge {
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .tech-badge:hover {
+            background: #764ba2;
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .code-example {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-family: 'Consolas', 'Monaco', monospace;
+            position: relative;
+            overflow: auto;
+        }
+
+        .code-example::before {
+            content: 'Python';
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            background: #667eea;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8em;
+        }
+
+        .course-links {
+            background: #f8f9fa;
+            border-right: 5px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        .course-links h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .course-links ul {
+            list-style: none;
+            padding-right: 0;
+        }
+
+        .course-links li {
+            margin: 10px 0;
+            padding-right: 20px;
+            position: relative;
+        }
+
+        .course-links li::before {
+            content: '🎯';
+            position: absolute;
+            right: 0;
+        }
+
+        .course-links a {
+            color: #764ba2;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .course-links a:hover {
+            color: #667eea;
+            text-decoration: underline;
+        }
+
+        .progress-bar {
+            background: #e0e0e0;
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            transition: width 1s ease;
+            animation: progressAnimation 2s ease-out;
+        }
+
+        @keyframes progressAnimation {
+            from { width: 0; }
+        }
+
+        .fun-fact {
+            background: #fffacd;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+            border-right: 5px solid #ffd700;
+            position: relative;
+        }
+
+        .fun-fact::before {
+            content: '💡';
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            font-size: 2em;
+            animation: swing 2s infinite;
+        }
+
+        @keyframes swing {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(10deg); }
+            75% { transform: rotate(-10deg); }
+        }
+
+        .checkpoint {
+            background: #e8f5e9;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+            border-right: 3px solid #4caf50;
+            transition: transform 0.3s;
+        }
+
+        .checkpoint:hover {
+            transform: translateX(-5px);
+            box-shadow: 3px 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .motivation-quote {
+            text-align: center;
+            font-style: italic;
+            font-size: 1.2em;
+            color: #666;
+            margin: 30px 0;
+            padding: 20px;
+            border-right: 3px solid #667eea;
+            border-left: 3px solid #764ba2;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .final-cta {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .final-cta h2 {
+            color: white;
+            border: none;
+            margin-bottom: 20px;
+        }
+
+        .cta-button {
+            background: white;
+            color: #667eea;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-size: 1.2em;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+            transition: all 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .icon-item {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            transition: all 0.3s;
+        }
+
+        .icon-item:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        .icon-item .icon {
+            font-size: 3em;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            h2 {
+                font-size: 1.5em;
+            }
+            
+            .tech-stack {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <!-- Slide 1: כותרת ופתיחה -->
+        <div class="slide">
+            <div class="voxela-logo">
+                <span class="logo-bars">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </span>
+                <span style="margin-right: 15px;">VOXELA</span>
+            </div>
+            <h1>🚀 מסע ההכשרה של עידן גבאי</h1>
+            <h2>מ-C++ ל-Python: הדרך להיות מפתח Voxela API</h2>
+            <div class="welcome-message">
+                <p>היי עידן! <span class="emoji">👋</span></p>
+                <p>מוכן להפוך את הידע שלך ב-C++ לסופר-כוחות של פיתוח ווב מודרני?</p>
+                <p>בואו נתחיל במסע של 4 שבועות שישנה את הקריירה שלך!</p>
+            </div>
+            <div class="fun-fact">
+                <strong>עובדה משעשעת:</strong> מעבר מ-C++ ל-Python זה כמו לעבור מלנהוג במכונית פורמולה 1 לטוס במטוס - פחות שליטה ישירה, אבל מגיעים הרבה יותר רחוק! ✈️
+            </div>
+        </div>
+
+        <!-- Slide 2: סקירה כללית -->
+        <div class="slide">
+            <div class="header-logo">
+                <span class="logo-bars">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </span>
+                <span style="margin-right: 8px; font-weight: bold;">VOXELA</span>
+            </div>
+            <h2>🎯 מה מחכה לך?</h2>
+            <div class="icon-grid">
+                <div class="icon-item">
+                    <span class="icon">⏱️</span>
+                    <strong>4 שבועות</strong>
+                    <p>160 שעות של למידה אינטנסיבית</p>
+                </div>
+                <div class="icon-item">
+                    <span class="icon">💻</span>
+                    <strong>Hands-on</strong>
+                    <p>80% תרגול מעשי</p>
+                </div>
+                <div class="icon-item">
+                    <span class="icon">🏆</span>
+                    <strong>תעודה</strong>
+                    <p>הסמכה בכל שבוע</p>
+                </div>
+                <div class="icon-item">
+                    <span class="icon">🚀</span>
+                    <strong>Production Ready</strong>
+                    <p>מוכן לעבודה אמיתית</p>
+                </div>
+            </div>
+            
+            <div class="tech-stack">
+                <span class="tech-badge">Python 3.12+</span>
+                <span class="tech-badge">FastAPI</span>
+                <span class="tech-badge">PostgreSQL</span>
+                <span class="tech-badge">Docker</span>
+                <span class="tech-badge">Google Cloud</span>
+                <span class="tech-badge">Terraform</span>
+                <span class="tech-badge">CI/CD</span>
+            </div>
+
+            <div class="motivation-quote">
+                "עידן, זכור - כל מפתח גדול התחיל מאיפה שאתה נמצא עכשיו. ההבדל היחיד? הם פשוט התחילו!" 💪
+            </div>
+        </div>
+
+        <!-- Slide 3: שבוע 1 -->
+        <div class="slide">
+            <h2>📅 שבוע 1: Python - השפה שלא צריך `;` בסוף</h2>
+            <div class="week-card">
+                <div class="week-number">1</div>
+                <h3>מה נלמד השבוע?</h3>
+                <ul>
+                    <li>🐍 Python 3.12 - התחביר שישנה את חייך</li>
+                    <li>⚡ Async/Await - כי חיכוי זה לא קול</li>
+                    <li>🌐 יסודות ווב מודרניים</li>
+                    <li>🐳 Docker - הקונטיינר שיכיל את כל הבאגים שלך</li>
+                </ul>
+
+                <div class="code-example">
+# עידן, תראה כמה Python יותר נקי מ-C++!
+def greet_idan():
+    """פונקציה שמברכת את עידן בלי לדאוג לזיכרון"""
+    return "שלום עידן! ברוך הבא ל-Python 🎉"
+
+# אין צורך ב-main(), אין malloc, אין free!
+print(greet_idan())
+                </div>
+
+                <div class="checkpoint">
+                    <strong>✅ משימת סוף שבוע:</strong> בניית REST API פשוט - כן, תוך שבוע אחד! (ב-C++ זה היה לוקח חודש...)
+                </div>
+            </div>
+
+            <div class="course-links">
+                <h4>🎓 קורסים מומלצים לשבוע זה:</h4>
+                <ul>
+                    <li><a href="https://realpython.com/python-type-checking/" target="_blank">Type Hints - כי גם Python יכול להיות מסודר</a></li>
+                    <li><a href="https://www.youtube.com/watch?v=0sOvCWFmrtA" target="_blank">FastAPI Full Course - 5 שעות שישנו את החיים</a></li>
+                    <li><a href="https://docs.docker.com/get-started/" target="_blank">Docker Getting Started - הקונטיינר לכל הצרות</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 4: שבוע 2 -->
+        <div class="slide">
+            <h2>📅 שבוע 2: FastAPI & Databases - כשהקסם קורה</h2>
+            <div class="week-card">
+                <div class="week-number">2</div>
+                <h3>הגיע הזמן לבנות API אמיתי!</h3>
+                
+                <div class="fun-fact">
+                    <strong>טיפ מעידן לעידן:</strong> FastAPI זה כמו Flask על סטרואידים - אותה פשטות, פי 10 יכולות! 💊
+                </div>
+
+                <div class="code-example">
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI(title="Idan's Amazing API")
+
+class IданMessage(BaseModel):
+    text: str
+    excitement_level: int = 100
+
+@app.post("/idan/says")
+async def idan_speaks(message: IdanMessage):
+    return {"idan_said": f"{message.text} {'!' * message.excitement_level}"}
+
+# Swagger UI בחינם! נסה לעשות את זה ב-C++... 😏
+                </div>
+
+                <h3>🗄️ SQLAlchemy - ה-ORM שיחסוך לך שעות</h3>
+                <ul>
+                    <li>אין יותר כתיבת SQL ידנית</li>
+                    <li>מיגרציות אוטומטיות עם Alembic</li>
+                    <li>Type safety מובנה</li>
+                </ul>
+
+                <div class="checkpoint">
+                    <strong>✅ אתגר השבוע:</strong> הרחבת Voxela API עם פיצ'ר חדש - כן, אתה כבר מוכן!
+                </div>
+            </div>
+
+            <div class="course-links">
+                <h4>🎓 משאבי למידה חיוניים:</h4>
+                <ul>
+                    <li><a href="https://fastapi.tiangolo.com/tutorial/" target="_blank">FastAPI Tutorial - התיעוד הכי טוב בעולם</a></li>
+                    <li><a href="https://docs.sqlalchemy.org/en/20/tutorial/" target="_blank">SQLAlchemy - מסדי נתונים בלי כאב ראש</a></li>
+                    <li><a href="https://jwt.io/introduction" target="_blank">JWT - כי אבטחה זה לא משחק</a></li>
+                </ul>
+            </div>
+
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 50%;">50% - חצי דרך עידן! 🎯</div>
+            </div>
+        </div>
+
+        <!-- Slide 4.5: מסדי נתונים ו-CAP Theorem -->
+        <div class="slide">
+            <h2>🗄️ צלילה עמוקה למסדי נתונים - PostgreSQL 17</h2>
+            
+            <div class="fun-fact">
+                <strong>עידן, ידעת?</strong> PostgreSQL נקרא "הפיל" בגלל הלוגו שלו, והוא חזק כמו פיל! 🐘
+            </div>
+
+            <h3>🎯 מה זה CAP Theorem? (עידן, זה חשוב!)</h3>
+            <div style="background: #f0f8ff; padding: 20px; border-radius: 15px; margin: 20px 0;">
+                <p style="font-size: 1.1em; text-align: center; margin-bottom: 20px;">
+                    <strong>CAP = Consistency + Availability + Partition Tolerance</strong>
+                </p>
+                <p style="text-align: center; color: #d32f2f; font-weight: bold;">
+                    אבל... אפשר לבחור רק 2 מתוך 3! 😱
+                </p>
+            </div>
+
+            <div class="icon-grid">
+                <div class="icon-item" style="background: #e3f2fd;">
+                    <span class="icon">🎯</span>
+                    <strong>Consistency</strong>
+                    <p>כל הקריאות מחזירות את הנתון העדכני ביותר</p>
+                    <small>כמו שכולם רואים את אותו הסטטוס בפייסבוק</small>
+                </div>
+                <div class="icon-item" style="background: #e8f5e9;">
+                    <span class="icon">✅</span>
+                    <strong>Availability</strong>
+                    <p>המערכת תמיד זמינה ומגיבה</p>
+                    <small>האתר עובד 24/7 בלי downtime</small>
+                </div>
+                <div class="icon-item" style="background: #fff3e0;">
+                    <span class="icon">🔗</span>
+                    <strong>Partition Tolerance</strong>
+                    <p>המערכת ממשיכה לעבוד גם אם חלק מהרשת נופל</p>
+                    <small>כמו WhatsApp שעובד גם כשחלק מהשרתים למטה</small>
+                </div>
+            </div>
+
+            <h3>🐘 למה PostgreSQL? (ולמה Cloud SQL?)</h3>
+            <div class="week-card" style="background: linear-gradient(135deg, #336791 0%, #4a90e2 100%); color: white;">
+                <h4 style="color: white;">PostgreSQL 17 + Cloud SQL = ❤️</h4>
+                <ul style="color: white;">
+                    <li><strong>ACID Compliant:</strong> עידן, הטרנזקציות שלך בטוחות כמו בבנק!</li>
+                    <li><strong>JSON Support:</strong> NoSQL בתוך SQL - המיטב משני העולמות</li>
+                    <li><strong>Full Text Search:</strong> חיפוש טקסט מהיר בלי Elasticsearch</li>
+                    <li><strong>Cloud SQL Managed:</strong> Google מטפל בגיבויים, אבטחה ו-scaling</li>
+                </ul>
+
+                <div class="code-example" style="background: #1e1e1e;">
+-- עידן, תראה כמה PostgreSQL מגניב!
+CREATE TABLE idan_leads (
+    id SERIAL PRIMARY KEY,
+    name TEXT NOT NULL,
+    data JSONB,  -- JSONB = JSON Binary, מהיר ומאונדקס!
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    search_vector tsvector GENERATED ALWAYS AS 
+        (to_tsvector('hebrew', name)) STORED
+);
+
+-- אינדקס על JSON field - משהו שב-MySQL קשה יותר
+CREATE INDEX idx_data_email ON idan_leads ((data->>'email'));
+
+-- Full text search בעברית!
+SELECT * FROM idan_leads 
+WHERE search_vector @@ to_tsquery('hebrew', 'עידן');
+                </div>
+            </div>
+
+            <h3>🎨 PostgreSQL במודל CAP</h3>
+            <div style="text-align: center; margin: 20px 0;">
+                <div style="display: inline-block; background: #f5f5f5; padding: 30px; border-radius: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+                    <h4>PostgreSQL בוחר: <span style="color: #4caf50;">Consistency</span> + <span style="color: #2196f3;">Availability</span></h4>
+                    <p style="margin-top: 15px;">במחיר של: פחות Partition Tolerance</p>
+                    <p style="font-size: 0.9em; color: #666; margin-top: 10px;">
+                        (אבל Cloud SQL מפצה על זה עם replication אוטומטי!)
+                    </p>
+                </div>
+            </div>
+
+            <div class="fun-fact">
+                <strong>טיפ פרו מעידן לעידן:</strong> אם אתה צריך Partition Tolerance מלא, תסתכל על Cassandra או DynamoDB. 
+                אבל ל-99% מהמקרים, PostgreSQL עם Cloud SQL יעשה את העבודה מצוין! 💪
+            </div>
+
+            <h3>🚀 פיצ'רים מיוחדים ב-PostgreSQL 17</h3>
+            <div class="tech-stack">
+                <span class="tech-badge">Parallel Queries</span>
+                <span class="tech-badge">Native Partitioning</span>
+                <span class="tech-badge">Logical Replication</span>
+                <span class="tech-badge">BRIN Indexes</span>
+                <span class="tech-badge">Row Level Security</span>
+            </div>
+
+            <div class="checkpoint">
+                <strong>✅ משימה מיוחדת לעידן:</strong> 
+                <ul>
+                    <li>צור טבלה עם JSONB column</li>
+                    <li>הוסף Full Text Search בעברית</li>
+                    <li>כתוב query שמשתמש ב-Window Functions</li>
+                    <li>נסה לשבור את ה-ACID properties (רמז: לא תצליח! 😄)</li>
+                </ul>
+            </div>
+
+            <div class="course-links">
+                <h4>🎓 משאבים לעידן שרוצה להעמיק:</h4>
+                <ul>
+                    <li><a href="https://www.postgresql.org/docs/17/index.html" target="_blank">PostgreSQL 17 Documentation - התנ"ך החדש</a></li>
+                    <li><a href="https://cloud.google.com/sql/docs/postgres" target="_blank">Cloud SQL for PostgreSQL - הענן שלך</a></li>
+                    <li><a href="https://www.youtube.com/watch?v=qI_g07C_Q5I" target="_blank">CAP Theorem Explained - 12 דקות שישנו את החיים</a></li>
+                    <li><a href="https://pgexercises.com/" target="_blank">PostgreSQL Exercises - תרגול אינטראקטיבי</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 5: שבוע 3 -->
+        <div class="slide">
+            <h2>📅 שבוע 3: Cloud & DevOps - עכשיו אתה DevOps Engineer!</h2>
+            <div class="week-card">
+                <div class="week-number">3</div>
+                
+                <div class="fun-fact">
+                    <strong>סוד קטן:</strong> 90% מה-DevOps זה לדעת איך לגגל את השגיאות הנכונות 🔍
+                </div>
+
+                <h3>☁️ Google Cloud Platform</h3>
+                <div class="icon-grid">
+                    <div class="icon-item">
+                        <span class="icon">🏃</span>
+                        <strong>Cloud Run</strong>
+                        <p>Deploy בלחיצת כפתור</p>
+                    </div>
+                    <div class="icon-item">
+                        <span class="icon">🗄️</span>
+                        <strong>Cloud SQL</strong>
+                        <p>PostgreSQL מנוהל</p>
+                    </div>
+                    <div class="icon-item">
+                        <span class="icon">🔐</span>
+                        <strong>Secret Manager</strong>
+                        <p>סודות במקום בטוח</p>
+                    </div>
+                    <div class="icon-item">
+                        <span class="icon">📊</span>
+                        <strong>Monitoring</strong>
+                        <p>לדעת מתי הכל נשבר</p>
+                    </div>
+                </div>
+
+                <h3>🏗️ Terraform - Infrastructure as Code</h3>
+                <div class="code-example">
+# עידן, תראה כמה קל להקים תשתית!
+resource "google_cloud_run_service" "idan_api" {
+  name     = "idan-awesome-api"
+  location = "us-central1"
+  
+  template {
+    spec {
+      containers {
+        image = "gcr.io/idan-project/voxela-api"
+        
+        env {
+          name  = "DEVELOPER"
+          value = "IDAN_THE_GREAT"
+        }
+      }
+    }
+  }
+}
+
+# בום! יש לך שרת בענן 🚀
+                </div>
+
+                <div class="checkpoint">
+                    <strong>✅ פרויקט השבוע:</strong> פריסת האפליקציה שלך ל-Production עם CI/CD מלא!
+                </div>
+            </div>
+
+            <div class="course-links">
+                <h4>🎓 למידה נוספת:</h4>
+                <ul>
+                    <li><a href="https://cloud.google.com/docs/overview" target="_blank">GCP Fundamentals - הענן שלך</a></li>
+                    <li><a href="https://developer.hashicorp.com/terraform/tutorials" target="_blank">Terraform - קוד שבונה תשתיות</a></li>
+                    <li><a href="https://docs.github.com/en/actions" target="_blank">GitHub Actions - אוטומציה בכיף</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 6: שבוע 4 -->
+        <div class="slide">
+            <h2>📅 שבוע 4: Advanced Topics - עידן, אתה כבר Senior!</h2>
+            <div class="week-card">
+                <div class="week-number">4</div>
+                
+                <h3>🎨 Design Patterns & Best Practices</h3>
+                <ul>
+                    <li>🏗️ Service Layer Architecture</li>
+                    <li>📦 Repository Pattern</li>
+                    <li>⚡ Event-Driven Architecture</li>
+                    <li>💾 Caching Strategies</li>
+                </ul>
+
+                <div class="fun-fact">
+                    <strong>חוכמת חיים:</strong> "Premature optimization is the root of all evil" - אבל עכשיו אתה כבר יודע מתי לאופטמז! 🎯
+                </div>
+
+                <h3>🧪 Testing Like a Pro</h3>
+                <div class="code-example">
+import pytest
+from unittest.mock import Mock
+
+# עידן, בדיקות זה לא רק ל-QA!
+@pytest.fixture
+def idan_client():
+    """Fixture שיוצר client מיוחד לעידן"""
+    return TestClient(app, headers={"X-Developer": "Idan"})
+
+async def test_idan_can_create_amazing_features(idan_client):
+    response = await idan_client.post("/api/features", 
+        json={"name": "Idan's Cool Feature", "awesomeness": 9000})
+    
+    assert response.status_code == 201
+    assert response.json()["creator"] == "The Great Idan"
+    
+# TDD - Test Driven Idan! 🎪
+                </div>
+
+                <h3>🚀 הפרויקט הסופי שלך</h3>
+                <div class="checkpoint">
+                    <strong>מערכת Lead Scoring עם ML:</strong>
+                    <ul>
+                        <li>✨ אלגוריתם חכם לניקוד לידים</li>
+                        <li>⚡ Caching לביצועים מטורפים</li>
+                        <li>🔐 אבטחה ברמת Production</li>
+                        <li>📊 Dashboard מרשים</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 100%;">100% - עידן, עשית את זה! 🎉🎊</div>
+            </div>
+        </div>
+
+        <!-- Slide 7: טיפים והמלצות -->
+        <div class="slide">
+            <h2>💡 טיפים מנצחים לעידן</h2>
+            
+            <h3>🎯 מ-C++ ל-Python - מה חשוב לזכור</h3>
+            <div class="icon-grid">
+                <div class="icon-item">
+                    <span class="icon">🧠</span>
+                    <strong>Memory? What Memory?</strong>
+                    <p>Python מנהל הכל - תתרכז בלוגיקה!</p>
+                </div>
+                <div class="icon-item">
+                    <span class="icon">🐍</span>
+                    <strong>Pythonic Thinking</strong>
+                    <p>List comprehensions הם החברים שלך</p>
+                </div>
+                <div class="icon-item">
+                    <span class="icon">📐</span>
+                    <strong>Indentation Matters</strong>
+                    <p>4 רווחים, לא טאבים - זה דת!</p>
+                </div>
+                <div class="icon-item">
+                    <span class="icon">🎨</span>
+                    <strong>Keep It Simple</strong>
+                    <p>"Explicit is better than implicit"</p>
+                </div>
+            </div>
+
+            <h3>📚 ספרים שישדרגו אותך</h3>
+            <ul>
+                <li>📖 "FastAPI Modern Python Web Development" - הביבליה של FastAPI</li>
+                <li>📖 "Architecture Patterns with Python" - ארכיטקטורה ברמה אחרת</li>
+                <li>📖 "Designing Data-Intensive Applications" - חובה לכל מפתח Backend</li>
+            </ul>
+
+            <div class="motivation-quote">
+                "עידן, תזכור - כל באג שאתה פותר היום הופך אותך למפתח טוב יותר מחר. וב-Python, לפחות תקבל הודעת שגיאה ברורה!" 😄
+            </div>
+        </div>
+
+        <!-- Slide 8: סיכום וקריאה לפעולה -->
+        <div class="slide">
+            <div class="final-cta">
+                <div class="voxela-logo" style="color: white; margin-bottom: 30px;">
+                    <span class="logo-bars">
+                        <span class="bar" style="background: white;"></span>
+                        <span class="bar" style="background: white;"></span>
+                        <span class="bar" style="background: white;"></span>
+                    </span>
+                    <span style="margin-right: 15px;">VOXELA</span>
+                </div>
+                <h2>🎊 עידן, אתה מוכן להתחיל!</h2>
+                <p style="font-size: 1.2em; margin: 20px 0;">
+                    4 שבועות מהיום, תהיה מפתח Full-Stack מקצועי עם ידע ב:
+                </p>
+                <div class="tech-stack" style="justify-content: center;">
+                    <span class="tech-badge" style="background: white; color: #667eea;">Python Expert</span>
+                    <span class="tech-badge" style="background: white; color: #667eea;">FastAPI Master</span>
+                    <span class="tech-badge" style="background: white; color: #667eea;">Cloud Architect</span>
+                    <span class="tech-badge" style="background: white; color: #667eea;">DevOps Pro</span>
+                </div>
+                
+                <h3 style="color: white; margin: 30px 0;">המסע שלך מתחיל עכשיו!</h3>
+                
+                <div style="background: rgba(255,255,255,0.2); padding: 20px; border-radius: 15px; margin: 20px 0;">
+                    <h4 style="color: white;">✅ הצעדים הראשונים שלך:</h4>
+                    <ol style="text-align: right; padding-right: 20px; font-size: 1.1em;">
+                        <li>התקן Python 3.12 ו-VS Code</li>
+                        <li>צור סביבה וירטואלית ראשונה</li>
+                        <li>Clone את ה-repo של Voxela</li>
+                        <li>הרץ את הבדיקות - ותחגוג כשהן עוברות!</li>
+                    </ol>
+                </div>
+                
+                <a href="#" class="cta-button">בוא נתחיל! 🚀</a>
+            </div>
+
+            <div class="motivation-quote" style="margin-top: 30px;">
+                <strong>"The best time to plant a tree was 20 years ago. The second best time is now."</strong><br>
+                <span style="font-size: 0.9em;">- חכמה סינית עתיקה (שכנראה נכתבה ב-Python)</span>
+            </div>
+
+            <div class="fun-fact" style="margin-top: 30px;">
+                <strong>P.S. עידן:</strong> שמעתי שמפתחי Python מקבלים משכורות יותר גבוהות ממפתחי C++... just saying 😉💰
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // אנימציה לגלילה חלקה
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            slides.forEach(slide => {
+                observer.observe(slide);
+            });
+
+            // אנימציה לבars של התקדמות
+            const progressBars = document.querySelectorAll('.progress-fill');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 500);
+            });
+        });
+    </script>
+</body>
+</html>
